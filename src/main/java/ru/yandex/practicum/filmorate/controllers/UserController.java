@@ -16,7 +16,7 @@ public class UserController {
         //TODO Подскажите как не дублировать эту проверку во всех метадах.
         // Если у меня будет 100000 запросов где надо name менять на логин, то мне 100000 раз это дублировать везде?
         // Хотел бы это как-то на уровне серилизации сделать, но там невозможно в метод передать другое поле класса
-        if(user.getName().isBlank()) {
+        if(user.getName() == null || user.getName().isEmpty()) {
             user.setName(user.getLogin());
         }
         return ResponseEntity.ok(HttpStatus.OK);
@@ -24,7 +24,7 @@ public class UserController {
 
     @PutMapping()
     public ResponseEntity<?> updateUser(@RequestBody @Valid User user) {
-        if(user.getName().isBlank()) {
+        if(user.getName() == null || user.getName().isEmpty()) {
             user.setName(user.getLogin());
         }
         return ResponseEntity.ok(HttpStatus.OK);
